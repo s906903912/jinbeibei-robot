@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/chat_provider.dart';
+import '../../services/speech_service.dart';
 
 /// 对话页面
 class ChatScreen extends StatefulWidget {
@@ -15,6 +16,8 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final SpeechService _speechService = SpeechService();
+  bool _isListening = false;
 
   @override
   void initState() {
@@ -28,6 +31,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void dispose() {
     _messageController.dispose();
     _scrollController.dispose();
+    _speechService.dispose();
     super.dispose();
   }
 
@@ -54,6 +58,32 @@ class _ChatScreenState extends State<ChatScreen> {
         );
       }
     });
+  }
+
+  void _toggleVoiceInput() async {
+    if (_isListening) {
+      await _speechService.stopListening();
+      setState(() => _isListening = false);
+    } else {
+      final success = await _speechService.initialize();
+      if (!success) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('语音识别初始化失败')),
+          );
+        }
+        return;
+      }
+      
+      setState(() => _isListening = true);
+      
+      await _speechService.startListening(
+        onResult: (text) {
+          _messageController.text = text;
+          setState(() => _isListening = false);
+        },
+      );
+    }
   }
 
   @override
@@ -148,19 +178,21 @@ class _ChatScreenState extends State<ChatScreen> {
       child: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.mic),
-            onPressed: () {
-              // TODO: 语音输入
-            },
+            icon: Icon(
+              _isListening ? Icons.mic : Icons.mic_none,
+              color: _isListening ? Colors.red : null,
+            ),
+            onPressed: _toggleVoiceInput,
           ),
           Expanded(
             child: TextField(
               controller: _messageController,
-              decoration: const InputDecoration(
-                hintText: '输入消息...',
+              decoration: InputDecoration(
+                hintText: _isListening ? '正在听...' : '输入消息...',
                 border: InputBorder.none,
               ),
               onSubmitted: (_) => _sendMessage(),
+              enabled: !_isListening,
             ),
           ),
           IconButton(
