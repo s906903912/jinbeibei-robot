@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'config/routes.dart';
+import 'config/theme.dart';
 import 'providers/device_provider.dart';
 import 'providers/chat_provider.dart';
 import 'providers/alarm_provider.dart';
-import 'services/websocket_service.dart';
 import 'services/storage_service.dart';
 
 void main() async {
@@ -30,21 +30,8 @@ class JinBeibeiApp extends StatelessWidget {
       child: MaterialApp(
         title: '金贝贝桌面精灵',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.amber,
-            brightness: Brightness.light,
-          ),
-          useMaterial3: true,
-          fontFamily: 'MiSans',
-        ),
-        darkTheme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.amber,
-            brightness: Brightness.dark,
-          ),
-          useMaterial3: true,
-        ),
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
         initialRoute: Routes.home,
         onGenerateRoute: Routes.generateRoute,
