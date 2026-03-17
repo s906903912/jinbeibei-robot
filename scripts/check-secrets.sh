@@ -67,14 +67,14 @@ else
 fi
 
 # 检查 .gitignore 是否忽略 .env
-if grep -q "^\.env$" .gitignore || grep -q "\.env$" ../.gitignore; then
+if grep -q "^\.env$" .gitignore 2>/dev/null || grep -q "\.env$" ../.gitignore 2>/dev/null; then
     echo -e "${GREEN}✓${NC} .env 已在 .gitignore 中"
 else
     echo -e "${RED}✗${NC} 错误：.env 未加入 .gitignore！"
     ((ERRORS++))
 fi
 
-cd ..
+cd .. 2>/dev/null || true
 
 echo ""
 
@@ -89,11 +89,11 @@ else
 fi
 
 # 检查是否有敏感文件已跟踪
-if git ls-files | grep -q "secrets.h\|\.env$"; then
+if git ls-files | grep -qE "(^|/)secrets\.h$|(^|/)\.env$"; then
     echo -e "${RED}✗${NC} 错误：敏感文件已在 Git 跟踪中！"
     echo "   请执行以下命令移除："
-    echo "   git rm --cached src/secrets.h"
-    echo "   git rm --cached server/.env"
+    echo "   git rm --cached src/secrets.h (如果存在)"
+    echo "   git rm --cached server/.env (如果存在)"
     ((ERRORS++))
 else
     echo -e "${GREEN}✓${NC} Git 未跟踪敏感文件"
