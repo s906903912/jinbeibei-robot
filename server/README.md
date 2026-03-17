@@ -29,6 +29,11 @@ QWEN_API_KEY=your_qwen_api_key_here
 
 # 允许的 CORS 来源（多个用逗号分隔）
 ALLOWED_ORIGINS=*
+
+# Cloudflare D1 数据库（可选，等待主人提供）
+# CF_ACCOUNT_ID=your_account_id
+# CF_DATABASE_ID=your_database_id
+# CF_API_TOKEN=your_api_token
 ```
 
 ### 启动服务器
@@ -185,10 +190,16 @@ server/
 │   ├── index.js          # 服务器入口
 │   ├── websocket/
 │   │   └── server.js     # WebSocket 服务器
+│   ├── dao/              # 数据访问层（待实现）
+│   │   ├── device-dao.js
+│   │   ├── alarm-dao.js
+│   │   └── chat-dao.js
 │   └── routes/
 │       ├── device.js     # 设备管理 API
 │       ├── alarm.js      # 闹钟管理 API
 │       └── chat.js       # 对话聊天 API
+├── scripts/
+│   └── init-database.js  # 数据库初始化脚本
 └── logs/                 # 日志目录
 ```
 

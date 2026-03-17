@@ -68,6 +68,7 @@ temp/
 *.db
 *.sqlite
 data/*.db
+sql/*.db
 
 # 缓存
 .cache/
