@@ -1,0 +1,33 @@
+{
+  "name": "jinbeibei-server",
+  "version": "0.1.0",
+  "description": "金贝贝桌面精灵 - WebSocket 服务器",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jinbeibei",
+    "desktop-pet",
+    "esp32",
+    "websocket",
+    "iot"
+  ],
+  "author": "Auther",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.14.2",
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "uuid": "^9.0.0",
+    "better-sqlite3": "^9.2.2",
+    "winston": "^3.11.0",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

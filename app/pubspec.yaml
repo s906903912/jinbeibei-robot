@@ -1,0 +1,64 @@
+name: jinbeibei_app
+description: 金贝贝桌面精灵 - 移动端控制 APP
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI 组件
+  cupertino_icons: ^1.0.6
+  flutter_animate: ^4.3.0
+  lottie: ^2.7.0
+  
+  # 状态管理
+  provider: ^6.1.1
+  
+  # 网络通信
+  web_socket_channel: ^2.4.0
+  http: ^1.1.0
+  
+  # 本地存储
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  shared_preferences: ^2.2.2
+  
+  # 语音功能
+  flutter_tts: ^3.8.3
+  speech_to_text: ^6.3.0
+  
+  # 工具
+  uuid: ^4.2.1
+  intl: ^0.18.1
+  url_launcher: ^6.2.1
+  
+  # 权限
+  permission_handler: ^11.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.7
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/animations/
+    - assets/sounds/
+  
+  fonts:
+    - family: MiSans
+      fonts:
+        - asset: assets/fonts/MiSans-Regular.ttf
+        - asset: assets/fonts/MiSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/MiSans-Bold.ttf
+          weight: 700

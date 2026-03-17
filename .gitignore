@@ -1,0 +1,67 @@
+# 编译产物
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.class
+*.pyc
+*.pyo
+
+# PlatformIO
+.pioenvs/
+.piolibdeps/
+.piopackages/
+libdeps/
+build/
+
+# Flutter/Dart
+app/build/
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.packages
+app/.pub-cache/
+app/.pub/
+app/pubspec.lock
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 日志
+logs/
+*.log
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# 敏感配置（包含真实 API Key 的文件）
+**/secrets.h
+**/.env.local
+**/config.local.js
+
+# 数据库文件
+*.db
+*.sqlite
+data/*.db
+
+# 缓存
+.cache/
+__pycache__/
