@@ -2,29 +2,41 @@
  * 金贝贝桌面精灵 - 配置文件
  * JinBeibei Configuration
  * 
- * 注意：敏感信息请通过 platformio.ini 或 secrets.h 管理
+ * ⚠️ 注意：
+ * - 敏感信息（WiFi 密码、API Key 等）请放在 secrets.h 中
+ * - secrets.h 已加入 .gitignore，不会提交到 Git
+ * - 复制 secrets.h.example 为 secrets.h 并填写真实配置
  */
 
 #ifndef CONFIG_H
 #define CONFIG_H
 
+// 引入敏感配置（如果存在）
+#ifdef HAVE_SECRETS_H
+#include "secrets.h"
+#endif
+
 // ==================== WiFi 配置 ====================
+// 如果没有 secrets.h，使用默认占位符
 
+#ifndef WIFI_SSID
 #define WIFI_SSID      "YOUR_WIFI_SSID"      // 替换为你的 WiFi 名称
+#endif
+
+#ifndef WIFI_PASSWORD
 #define WIFI_PASSWORD  "YOUR_WIFI_PASSWORD"  // 替换为你的 WiFi 密码
-
-// ==================== 飞书机器人配置 ====================
-
-#define FEISHU_BOT_NAME     "金贝贝桌面精灵"
-#define FEISHU_WEBHOOK_URL  "YOUR_FEISHU_WEBHOOK_URL"  // 飞书机器人 Webhook URL
-#define FEISHU_APP_ID       "YOUR_APP_ID"              // 飞书应用 App ID
-#define FEISHU_APP_SECRET   "YOUR_APP_SECRET"          // 飞书应用 App Secret
+#endif
 
 // ==================== 大模型 API 配置 ====================
 
-// 使用 Qwen API（阿里云百炼）
+#ifndef LLM_PROVIDER
 #define LLM_PROVIDER        "qwen"
-#define QWEN_API_KEY        "YOUR_QWEN_API_KEY"
+#endif
+
+#ifndef QWEN_API_KEY
+#define QWEN_API_KEY        "YOUR_QWEN_API_KEY"  // 如无 secrets.h，需在此填写
+#endif
+
 #define QWEN_MODEL          "qwen-plus"
 #define QWEN_API_URL        "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
 

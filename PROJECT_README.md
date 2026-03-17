@@ -41,23 +41,38 @@
 
 ```
 jinbeibei-robot/
-├── README.md                 # 本文件
+├── README.md                 # 项目说明
+├── PROJECT_README.md         # 项目总览
+├── DEPLOYMENT.md             # 部署指南
+├── SECURITY.md               # 安全配置指南 ⭐
+├── .gitignore                # Git 忽略规则
+│
 ├── docs/                     # 文档
 │   ├── app_architecture.md   # APP 架构设计
 │   ├── server_architecture.md # 服务器架构设计
 │   └── hardware/             # 硬件文档
+│
 ├── firmware/                 # 固件代码 (ESP32-S3)
 │   ├── src/
+│   │   ├── main.cpp          # 主程序
+│   │   ├── config.h          # 公开配置
+│   │   ├── secrets.h.example # 敏感配置模板
+│   │   └── secrets.h         # ⚠️ 真实配置（不提交）
 │   ├── platformio.ini
 │   └── README.md
+│
 ├── server/                   # WebSocket 服务器
 │   ├── src/
 │   ├── package.json
+│   ├── .env.example          # 环境变量模板
+│   ├── .env                  # ⚠️ 真实配置（不提交）
 │   └── README.md
+│
 ├── app/                      # Flutter 移动端 APP
 │   ├── lib/
 │   ├── pubspec.yaml
 │   └── README.md
+│
 └── assets/                   # 资源文件
     ├── images/
     ├── animations/
@@ -65,6 +80,28 @@ jinbeibei-robot/
 ```
 
 ## 🚀 快速开始
+
+### ⚠️ 安全提示
+
+**开始之前，请先配置敏感信息：**
+
+1. **固件端**
+```bash
+cd firmware/src
+cp secrets.h.example secrets.h
+# 编辑 secrets.h 填写 WiFi 密码和 API Key
+```
+
+2. **服务器端**
+```bash
+cd server
+cp .env.example .env
+# 编辑 .env 填写 Qwen API Key
+```
+
+📝 详见 [安全配置指南](SECURITY.md)
+
+---
 
 ### 1. 硬件准备
 
@@ -171,6 +208,8 @@ flutter run
 ## 📖 文档索引
 
 - [项目总览](README.md)
+- [部署指南](DEPLOYMENT.md)
+- [安全配置](SECURITY.md) ⭐ **重要**
 - [硬件指南](docs/hardware/)
   - [硬件清单](docs/hardware/shopping_guide.md)
   - [接线指南](docs/hardware/wiring.md)
