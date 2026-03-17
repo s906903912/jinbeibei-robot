@@ -1,0 +1,17 @@
+{
+  "name": "jinbeibei-worker",
+  "version": "0.1.0",
+  "description": "金贝贝桌面精灵 Cloudflare Worker API",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "init-db": "wrangler d1 execute jinbeibei --file=../sql/schema.sql"
+  },
+  "keywords": ["cloudflare", "workers", "d1", "jinbeibei"],
+  "author": "Auther",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
