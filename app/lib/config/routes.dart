@@ -8,6 +8,8 @@ import '../screens/weather/weather_screen.dart';
 import '../screens/todo/todo_screen.dart';
 import '../screens/pomodoro/pomodoro_screen.dart';
 import '../screens/timer/timer_screen.dart';
+import '../screens/news/news_screen.dart';
+import '../screens/message_board/message_board_screen.dart';
 
 /// 路由配置
 class Routes {
@@ -21,6 +23,8 @@ class Routes {
   static const String todo = '/todo';
   static const String pomodoro = '/pomodoro';
   static const String timer = '/timer';
+  static const String news = '/news';
+  static const String messageBoard = '/message-board';
 
   /// 生成路由
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -61,6 +65,12 @@ class Routes {
       
       case Routes.timer:
         return MaterialPageRoute(builder: (_) => const TimerScreen());
+      
+      case Routes.news:
+        return MaterialPageRoute(builder: (_) => const NewsScreen());
+      
+      case Routes.messageBoard:
+        return MaterialPageRoute(builder: (_) => const MessageBoardScreen());
       
       default:
         return MaterialPageRoute(
