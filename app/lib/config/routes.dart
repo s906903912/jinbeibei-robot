@@ -6,6 +6,8 @@ import '../screens/settings/settings_screen.dart';
 import '../screens/device/device_pairing_screen.dart';
 import '../screens/weather/weather_screen.dart';
 import '../screens/todo/todo_screen.dart';
+import '../screens/pomodoro/pomodoro_screen.dart';
+import '../screens/timer/timer_screen.dart';
 
 /// 路由配置
 class Routes {
@@ -17,6 +19,8 @@ class Routes {
   static const String devicePairing = '/device-pairing';
   static const String weather = '/weather';
   static const String todo = '/todo';
+  static const String pomodoro = '/pomodoro';
+  static const String timer = '/timer';
 
   /// 生成路由
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -51,6 +55,12 @@ class Routes {
       
       case Routes.todo:
         return MaterialPageRoute(builder: (_) => const TodoScreen());
+      
+      case Routes.pomodoro:
+        return MaterialPageRoute(builder: (_) => const PomodoroScreen());
+      
+      case Routes.timer:
+        return MaterialPageRoute(builder: (_) => const TimerScreen());
       
       default:
         return MaterialPageRoute(
