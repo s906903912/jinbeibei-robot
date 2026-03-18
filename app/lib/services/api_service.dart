@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 class ApiService {
   String _baseUrl;
   
-  ApiService({String baseUrl = 'http://localhost:8123'}) : _baseUrl = baseUrl;
+  ApiService({String baseUrl = 'https://jinbeibei-api.junxuanz.workers.dev'}) : _baseUrl = baseUrl;
   
   void updateBaseUrl(String url) {
     _baseUrl = url;
