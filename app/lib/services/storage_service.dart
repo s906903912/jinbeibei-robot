@@ -56,12 +56,13 @@ class StorageService {
   
   /// 保存当前选中的设备 ID
   static Future<void> setCurrentDevice(String deviceId) async {
-    await _settingsBox.put('current_device_id', deviceId);
+    await _settingsBox.put('current_device_id', {'id': deviceId});
   }
   
   /// 获取当前选中的设备 ID
   static String? getCurrentDevice() {
-    return _settingsBox.get('current_device_id') as String?;
+    final data = _settingsBox.get('current_device_id') as Map<String, dynamic>?;
+    return data?['id'] as String?;
   }
   
   // ==================== 设置管理 ====================
@@ -90,21 +91,19 @@ class StorageService {
   
   /// 保存 WiFi 配置
   static Future<void> saveWifiConfig(String ssid, String password) async {
-    await _settingsBox.put('wifi_ssid', ssid);
-    await _settingsBox.put('wifi_password', password);
+    await _settingsBox.put('wifi_config', {'ssid': ssid, 'password': password});
     debugPrint('[Storage] WiFi 配置已保存');
   }
   
   /// 获取 WiFi 配置
   static Map<String, String>? getWifiConfig() {
-    final ssid = _settingsBox.get('wifi_ssid') as String?;
-    final password = _settingsBox.get('wifi_password') as String?;
+    final data = _settingsBox.get('wifi_config') as Map<String, dynamic>?;
     
-    if (ssid == null) return null;
+    if (data == null) return null;
     
     return {
-      'ssid': ssid,
-      'password': password ?? '',
+      'ssid': data['ssid'] as String,
+      'password': data['password'] as String? ?? '',
     };
   }
   
@@ -148,11 +147,12 @@ class StorageService {
   static Future<void> clearChatHistory(String deviceId) async {
     final keysToDelete = <String>[];
     
-    _chatBox.forEach((key, value) {
-      if (value['deviceId'] == deviceId) {
+    for (final key in _chatBox.keys) {
+      final value = _chatBox.get(key);
+      if (value is Map<String, dynamic> && value['deviceId'] == deviceId) {
         keysToDelete.add(key);
       }
-    });
+    }
     
     for (final key in keysToDelete) {
       await _chatBox.delete(key);

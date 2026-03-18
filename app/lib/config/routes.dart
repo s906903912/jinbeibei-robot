@@ -17,10 +17,10 @@ class Routes {
   /// 生成路由
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case home:
+      case '/':
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       
-      case chat:
+      case '/chat':
         final args = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
           builder: (_) => ChatScreen(
@@ -28,7 +28,7 @@ class Routes {
           ),
         );
       
-      case alarm:
+      case '/alarm':
         final args = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
           builder: (_) => AlarmScreen(
@@ -36,10 +36,10 @@ class Routes {
           ),
         );
       
-      case settings:
+      case '/settings':
         return MaterialPageRoute(builder: (_) => const SettingsScreen());
       
-      case devicePairing:
+      case '/device-pairing':
         return MaterialPageRoute(builder: (_) => const DevicePairingScreen());
       
       default:
