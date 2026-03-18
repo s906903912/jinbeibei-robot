@@ -21,7 +21,18 @@ export default {
 
     try {
       // 路由分发
-      if (path.startsWith('/api/devices')) {
+      if (path === '/' || path === '') {
+        return jsonResponse({
+          name: '金贝贝桌面精灵 API',
+          version: '1.0.0',
+          endpoints: {
+            health: '/api/health',
+            devices: '/api/devices',
+            alarms: '/api/alarms',
+            chat: '/api/chat'
+          }
+        });
+      } else if (path.startsWith('/api/devices')) {
         return handleDevices(request, env);
       } else if (path.startsWith('/api/alarms')) {
         return handleAlarms(request, env);
