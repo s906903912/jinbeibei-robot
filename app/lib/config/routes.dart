@@ -4,6 +4,8 @@ import '../screens/chat/chat_screen.dart';
 import '../screens/alarm/alarm_screen.dart';
 import '../screens/settings/settings_screen.dart';
 import '../screens/device/device_pairing_screen.dart';
+import '../screens/weather/weather_screen.dart';
+import '../screens/todo/todo_screen.dart';
 
 /// 路由配置
 class Routes {
@@ -13,6 +15,8 @@ class Routes {
   static const String alarm = '/alarm';
   static const String settings = '/settings';
   static const String devicePairing = '/device-pairing';
+  static const String weather = '/weather';
+  static const String todo = '/todo';
 
   /// 生成路由
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -39,8 +43,14 @@ class Routes {
       case Routes.settings:
         return MaterialPageRoute(builder: (_) => const SettingsScreen());
       
-      case '/device-pairing':
+      case Routes.devicePairing:
         return MaterialPageRoute(builder: (_) => const DevicePairingScreen());
+      
+      case Routes.weather:
+        return MaterialPageRoute(builder: (_) => const WeatherScreen());
+      
+      case Routes.todo:
+        return MaterialPageRoute(builder: (_) => const TodoScreen());
       
       default:
         return MaterialPageRoute(
