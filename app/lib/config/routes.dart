@@ -36,7 +36,7 @@ class Routes {
           ),
         );
       
-      case '/settings':
+      case Routes.settings:
         return MaterialPageRoute(builder: (_) => const SettingsScreen());
       
       case '/device-pairing':

@@ -7,9 +7,9 @@ class StorageService {
   static const String _settingsBoxName = 'settings';
   static const String _chatBoxName = 'chat_history';
   
-  static late Box<Map<String, dynamic>> _deviceBox;
-  static late Box<Map<String, dynamic>> _settingsBox;
-  static late Box<Map<String, dynamic>> _chatBox;
+  static late Box _deviceBox;
+  static late Box _settingsBox;
+  static late Box _chatBox;
   
   static bool _initialized = false;
   
@@ -18,9 +18,9 @@ class StorageService {
     if (_initialized) return;
     
     try {
-      _deviceBox = await Hive.openBox<Map<String, dynamic>>(_deviceBoxName);
-      _settingsBox = await Hive.openBox<Map<String, dynamic>>(_settingsBoxName);
-      _chatBox = await Hive.openBox<Map<String, dynamic>>(_chatBoxName);
+      _deviceBox = await Hive.openBox(_deviceBoxName);
+      _settingsBox = await Hive.openBox(_settingsBoxName);
+      _chatBox = await Hive.openBox(_chatBoxName);
       
       _initialized = true;
       debugPrint('[Storage] 初始化完成');
