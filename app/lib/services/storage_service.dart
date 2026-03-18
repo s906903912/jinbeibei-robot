@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
 
 /// 本地存储服务 - 使用 Hive 键值对数据库
 class StorageService {
@@ -18,6 +20,20 @@ class StorageService {
     if (_initialized) return;
     
     try {
+      // 在非 Web 平台上需要初始化 Hive 并指定路径
+      if (!kIsWeb) {
+        Directory? directory;
+        if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+          directory = await getApplicationDocumentsDirectory();
+        } else if (Platform.isAndroid || Platform.isIOS) {
+          directory = await getApplicationDocumentsDirectory();
+        }
+        
+        if (directory != null) {
+          Hive.init(directory.path);
+        }
+      }
+      
       _deviceBox = await Hive.openBox(_deviceBoxName);
       _settingsBox = await Hive.openBox(_settingsBoxName);
       _chatBox = await Hive.openBox(_chatBoxName);
@@ -45,7 +61,7 @@ class StorageService {
   
   /// 获取所有设备
   static List<Map<String, dynamic>> getAllDevices() {
-    return _deviceBox.values.toList();
+    return _deviceBox.values.cast<Map<String, dynamic>>().toList();
   }
   
   /// 删除设备
@@ -129,6 +145,7 @@ class StorageService {
   /// 获取对话历史
   static List<Map<String, dynamic>> getChatHistory(String deviceId, {int limit = 50}) {
     final messages = _chatBox.values
+        .cast<Map<String, dynamic>>()
         .where((m) => m['deviceId'] == deviceId)
         .toList();
     

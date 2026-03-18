@@ -26,6 +26,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   shared_preferences: ^2.2.2
+  path_provider: ^2.1.1
   
   # 语音功能
   flutter_tts: ^3.8.3
@@ -54,11 +55,11 @@ flutter:
     - assets/animations/
     - assets/sounds/
   
-  # fonts:
-  #   - family: MiSans
-  #     fonts:
-  #       - asset: assets/fonts/MiSans-Regular.ttf
-  #       - asset: assets/fonts/MiSans-Medium.ttf
-  #         weight: 500
-  #       - asset: assets/fonts/MiSans-Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: MiSans
+      fonts:
+        - asset: assets/fonts/MiSans-Regular.otf
+        - asset: assets/fonts/MiSans-Medium.otf
+          weight: 500
+        - asset: assets/fonts/MiSans-Bold.otf
+          weight: 700

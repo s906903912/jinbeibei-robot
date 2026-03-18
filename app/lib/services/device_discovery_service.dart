@@ -1,8 +1,9 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:io' show InternetAddress, RawDatagramSocket, RawSocketEvent, Datagram;
 import 'package:flutter/foundation.dart';
 
 /// 设备发现服务 - 局域网设备搜索
+/// 注意：此服务仅在原生平台（Android/iOS/Windows）上可用，Web 平台不支持
 class DeviceDiscoveryService {
   static const int _discoveryPort = 8124;
   static const String _discoveryMessage = 'JINBEIBEI_DISCOVERY';
@@ -13,8 +14,16 @@ class DeviceDiscoveryService {
   RawDatagramSocket? _socket;
   bool _isScanning = false;
   
+  /// 检查是否支持设备发现（Web 平台不支持）
+  bool get isSupported => !kIsWeb;
+  
   /// 开始扫描设备
   Future<void> startScan() async {
+    if (!isSupported) {
+      debugPrint('[DeviceDiscovery] Web 平台不支持设备发现功能');
+      return;
+    }
+    
     if (_isScanning) return;
     
     _isScanning = true;
@@ -84,6 +93,7 @@ class DeviceDiscoveryService {
   
   /// 停止扫描
   void stopScan() {
+    if (!isSupported) return;
     _socket?.close();
     _socket = null;
     _isScanning = false;

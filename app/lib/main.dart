@@ -5,6 +5,7 @@ import 'config/theme.dart';
 import 'providers/device_provider.dart';
 import 'providers/chat_provider.dart';
 import 'providers/alarm_provider.dart';
+import 'providers/language_provider.dart';
 import 'services/storage_service.dart';
 
 void main() async {
@@ -26,15 +27,20 @@ class JinBeibeiApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DeviceProvider()),
         ChangeNotifierProvider(create: (_) => ChatProvider()),
         ChangeNotifierProvider(create: (_) => AlarmProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
       ],
-      child: MaterialApp(
-        title: '金贝贝桌面精灵',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
-        initialRoute: Routes.home,
-        onGenerateRoute: Routes.generateRoute,
+      child: Consumer<LanguageProvider>(
+        builder: (context, languageProvider, child) {
+          return MaterialApp(
+            title: '金贝贝桌面精灵',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: languageProvider.themeMode,
+            initialRoute: Routes.home,
+            onGenerateRoute: Routes.generateRoute,
+          );
+        },
       ),
     );
   }
