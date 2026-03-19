@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wrangler d1:*)",
+      "Bash(curl -s https://jbb.vivianw.cn/api/devices)",
+      "Bash(curl -s https://jbb.vivianw.cn/api/alarms)",
+      "Bash(curl -s https://jbb.vivianw.cn/health)",
+      "Bash(curl -s https://jbb.vivianw.cn/api/health)"
+    ]
+  }
+}
